@@ -1,11 +1,11 @@
 # Letter Dispair
 
-This machine was vulnerable to a [PHPMailer vulnerability - CVE-2016-10033](https://github.com/opsxcq/exploit-CVE-2016-10033). 
-After reading through the soruce code once it googled for email vulnerabilities and this was the first one I found. 
-A lot of things looked right at first glance, and when I saw that I could control the fifth `$additional_parameters` param sent to the `mail` 
+The machine exposed a directory index when browsing to http://ip:port, there was a mailer.php script left and it was possible to download a zip file containing the source code. After reading through the soruce code once it googled for email vulnerabilities and CVE-2016-10033 was the first one I found.  A lot of things looked right at first glance, and when I saw that I could control the fifth `$additional_parameters` param sent to the `mail` 
 function I decided to try and exploit it. 
 
-The exploit was fairly straight forward. `from_email` sets the `$additional_parameters` param that we use to control where to write the log files to.
+This machine was vulnerable to the [PHPMailer vulnerability - CVE-2016-10033](https://github.com/opsxcq/exploit-CVE-2016-10033). 
+
+The exploit was fairly straight forward. `from_email` sets the `$additional_parameters` param that we use to control where to write the mail log files to.
 The file is written to `/var/www/html/exploit.php` which is a location that we're allowed to execute php files in. The payload then contains `<?php system('cat /flag.txt');?>`
 which will be written to the php file and then parsed and executed when visiting the file. 
 
